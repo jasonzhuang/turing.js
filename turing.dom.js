@@ -149,7 +149,7 @@ define('turing.dom', ['turing.core'], function(turing) {
     return joinPatterns(
       convertPatterns(convertPatterns(macros), rules)
     );
-  }
+  }// end scanner definition
 
   scannerRegExp = scanner();
 
@@ -343,6 +343,7 @@ define('turing.dom', ['turing.core'], function(turing) {
     var match, r, finder;
 
     r = scannerRegExp;
+    console.log(r);
     r.lastIndex = 0;
 
     while (match = r.exec(this.selector)) {
