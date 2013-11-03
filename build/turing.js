@@ -130,6 +130,7 @@
           dependencies[i] = modules[dependencies[i]];
         }
       }
+      // here define is a closure, so can refer modules variable
       modules[module] = fn.apply(this, dependencies || []);
     }
   };
@@ -2707,7 +2708,7 @@ define('turing.net', ['turing.core', 'turing.dom'], function(turing) {
  *       alert('Orientation is now: ' + turing.touch.orientation());
  *     });
  */
-define('turing.dom', ['turing.core', 'turing.dom', 'turing.events'], function(turing, dom, events) {
+define('turing.touch', ['turing.core', 'turing.dom', 'turing.events'], function(turing, dom, events) {
   var touch = {}, state = {};
 
   touch.swipeThreshold = 50;
