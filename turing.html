@@ -9,11 +9,12 @@
   <h1>Turing</h1>
   <p>Open your browser's debug console and play around with <code>turing()</code></p>
   <p>The <code>$t()</code> alias is also available.</p>
+  <div id="select_div"><a href="#" id="select_link">Test</a></div>
   <script>
       (function(){
          //playDom();
-         //playAjax();
-          playRequire();
+         //playJsonp();
+          playFun();
       }());
 
      function playDom(){
@@ -22,29 +23,25 @@
          console.log(turing.dom.get('p'));
      };
 
-     function playAjax(){
-         var json = '{"name": "value", "some": [1,2,3]}';
-         console.log(window.JSON.parse(json + ''));
-         turing.jsonp('http://feeds.delicious.com/v1/json/alex_young/javascript?callback={callback}',
-                 { success: function(json) { console.log(json)}, failure:function(err){console.log('error')}});
+     function playJsonp(){
+         turing('#select_link').click(function(e){
+             e.preventDefault();
+             console.log('select_link clicked');
+
+             function test(data){
+                 return {"message":"ok"};
+             }
+
+             turing.jsonp("http://localhost:3000/endpoint?callback={callback}&hello=angular", {success:function(data){
+                 console.log('success');
+                 console.log(JSON.stringify(data));
+             }})
+
+         });
      };
 
-     function playRequire(){
-         var require = turing.require;
-        define('emailService',[],function(){
-            var emailService = {};
-            emailService.sendMail = function(){
-              console.log("send a mail...");
-            };
-
-            window.emailService = emailService;
-        });
-
-        emailService.sendMail();
-
-         var oo = require('assert.js');
+     function playFun(){
      }
-
   </script>
 </body>
 </html>
